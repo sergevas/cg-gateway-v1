@@ -1,0 +1,54 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"id": "DeviceEventRequest.json",
+	"title": "DeviceEventRequest",
+	"description": "Represents IoT field device request domain event for communication support between a field device and the gateway",
+	"type": "object",
+	"javaType": "dev.sergevas.cg.gateway.entity.DeviceEventRequest",
+	"additionalProperties": true,
+	"properties": {
+		"device_id": {
+			"type": "string",
+			"description": "The unique id of a device in the gateway context"
+		},
+		"devcie_name": {
+			"type": "string",
+			"description": "Device name"
+		},
+		"topic": {
+			"type": "string",
+			"description": "Device request topic name"
+		},
+		"command": {
+			"type": "object",
+			"description": "Device attenuator command",
+			"properties": {
+				"command_id": {
+					"description": "Command Id",
+					"type": "string"
+				},
+				"params": {
+					"description": "Command parameters list",
+					"type": "array",
+					"items": {
+						"param": {
+							"type": "object",
+							"description": "Command parameter",
+							"properties": {
+								"name": {
+									"type": "string",
+									"description": "Param name"
+								},
+								"value": {
+									"type": "string",
+									"description": "Param value"
+								}
+							}
+						}
+					},
+					"minItems": 0
+				}
+			}
+		}
+	}
+}
