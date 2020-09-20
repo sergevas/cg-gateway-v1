@@ -3,8 +3,11 @@ package dev.sergevas.cg.gateway.entity;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 /**
@@ -38,13 +42,15 @@ public class Command implements Serializable
      * 
      */
     @JsonProperty("params")
+    @JsonDeserialize(as = java.util.LinkedHashSet.class)
     @JsonPropertyDescription("Command parameters list")
+    @Size(min = 0)
     @Valid
-    private Params params;
+    private Set<EventParam> params = new LinkedHashSet<EventParam>();
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 7961235812671689585L;
+    private final static long serialVersionUID = -3662443966533548770L;
 
     /**
      * Command Id
@@ -74,7 +80,7 @@ public class Command implements Serializable
      * 
      */
     @JsonProperty("params")
-    public Params getParams() {
+    public Set<EventParam> getParams() {
         return params;
     }
 
@@ -83,11 +89,11 @@ public class Command implements Serializable
      * 
      */
     @JsonProperty("params")
-    public void setParams(Params params) {
+    public void setParams(Set<EventParam> params) {
         this.params = params;
     }
 
-    public Command withParams(Params params) {
+    public Command withParams(Set<EventParam> params) {
         this.params = params;
         return this;
     }

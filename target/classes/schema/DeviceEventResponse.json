@@ -1,31 +1,47 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"id": "DeviceEvent.json",
-	"title": "DeviceEvent",
+	"id": "DeviceEventResponse.json",
+	"title": "DeviceEventResponse",
 	"description": "Represents IoT field device response domain events for communication support between a field device and the gateway",
 	"type": "object",
 	"javaType": "dev.sergevas.cg.gateway.entity.DeviceEventResponse",
 	"additionalProperties": true,
-	"properties": {
-		"corellation_uuid": {
-			"type": "string",
-			"description": "Correlation id for ISOP SOAP Web Service Request UUID to SKC Ticket UUID mapping"
-		},
-		"ticket_uuid": {
-			"type": "string",
-			"description": "SKC Ticket UUID"
-		},
-		"serv_id": {
-			"type": "string",
-			"description": "EK ASUTR Service ID"
-		},
-		"document_code": {
-			"type": "string",
-			"description": "Код документа СКЦ"
-		},
-		"transition": {
-			"type": "string",
-			"description": "SKC API transition value"
-		}
-	}
+	"properties":{
+	  "event_id":{
+         "type":"string",
+         "description":"The response event unique id"
+      },
+      
+      "result":{
+         "type":"object",
+         "description":"Device command execution result",
+         "properties":{
+            "params":{
+               "description":"result content element list",
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/event_param"
+               },
+               "uniqueItems":true,
+               "minItems":0
+            }
+         }
+      }
+   },
+   "definitions":{
+      "event_param":{
+         "type":"object",
+         "description":"Event param",
+         "properties":{
+            "name":{
+               "type":"string",
+               "description":"Param name"
+            },
+            "value":{
+               "type":"string",
+               "description":"Param value"
+            }
+         }
+      }
+   }
 }

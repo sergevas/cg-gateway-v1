@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+    "event_id",
     "device_id",
     "devcie_name",
     "topic",
@@ -30,6 +31,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class DeviceEventRequest implements Serializable
 {
 
+    /**
+     * The request event unique id
+     * 
+     */
+    @JsonProperty("event_id")
+    @JsonPropertyDescription("The request event unique id")
+    private String eventId;
     /**
      * The unique id of a device in the gateway context
      * 
@@ -62,7 +70,30 @@ public class DeviceEventRequest implements Serializable
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -3446508552426460698L;
+    private final static long serialVersionUID = -3300891524940543926L;
+
+    /**
+     * The request event unique id
+     * 
+     */
+    @JsonProperty("event_id")
+    public String getEventId() {
+        return eventId;
+    }
+
+    /**
+     * The request event unique id
+     * 
+     */
+    @JsonProperty("event_id")
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
+    }
+
+    public DeviceEventRequest withEventId(String eventId) {
+        this.eventId = eventId;
+        return this;
+    }
 
     /**
      * The unique id of a device in the gateway context
@@ -175,6 +206,10 @@ public class DeviceEventRequest implements Serializable
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(DeviceEventRequest.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("eventId");
+        sb.append('=');
+        sb.append(((this.eventId == null)?"<null>":this.eventId));
+        sb.append(',');
         sb.append("deviceId");
         sb.append('=');
         sb.append(((this.deviceId == null)?"<null>":this.deviceId));
@@ -206,6 +241,7 @@ public class DeviceEventRequest implements Serializable
     @Override
     public int hashCode() {
         int result = 1;
+        result = ((result* 31)+((this.eventId == null)? 0 :this.eventId.hashCode()));
         result = ((result* 31)+((this.devcieName == null)? 0 :this.devcieName.hashCode()));
         result = ((result* 31)+((this.topic == null)? 0 :this.topic.hashCode()));
         result = ((result* 31)+((this.additionalProperties == null)? 0 :this.additionalProperties.hashCode()));
@@ -223,7 +259,7 @@ public class DeviceEventRequest implements Serializable
             return false;
         }
         DeviceEventRequest rhs = ((DeviceEventRequest) other);
-        return ((((((this.devcieName == rhs.devcieName)||((this.devcieName!= null)&&this.devcieName.equals(rhs.devcieName)))&&((this.topic == rhs.topic)||((this.topic!= null)&&this.topic.equals(rhs.topic))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.deviceId == rhs.deviceId)||((this.deviceId!= null)&&this.deviceId.equals(rhs.deviceId))))&&((this.command == rhs.command)||((this.command!= null)&&this.command.equals(rhs.command))));
+        return (((((((this.eventId == rhs.eventId)||((this.eventId!= null)&&this.eventId.equals(rhs.eventId)))&&((this.devcieName == rhs.devcieName)||((this.devcieName!= null)&&this.devcieName.equals(rhs.devcieName))))&&((this.topic == rhs.topic)||((this.topic!= null)&&this.topic.equals(rhs.topic))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.deviceId == rhs.deviceId)||((this.deviceId!= null)&&this.deviceId.equals(rhs.deviceId))))&&((this.command == rhs.command)||((this.command!= null)&&this.command.equals(rhs.command))));
     }
 
 }
